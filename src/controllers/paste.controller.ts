@@ -39,10 +39,11 @@ export async function getRaw(ctx: Context<AppState>) {
   }
 
   if (ctx.request.url.searchParams.get("meta") === "1") {
+    const contentType = meta.mime || "text/plain; charset=UTF-8";
     ctx.response.status = 200;
     ctx.response.headers.set("Content-Type", "application/json");
     ctx.response.body = {
-      contentType: meta.mime,
+      contentType,
       contentLength: meta.len,
       title: meta.title ?? "",
     };
